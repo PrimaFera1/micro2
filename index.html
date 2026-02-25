@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi Elektrolit &amp; Non Elektrolit</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Nunito', sans-serif; }
+    h1, h2, h3, .title-font { font-family: 'Poppins', sans-serif; }
+    
+    .slide { display: none; animation: fadeIn 0.5s ease; }
+    .slide.active { display: block; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(250, 204, 21, 0.4); }
+      50% { box-shadow: 0 0 40px rgba(250, 204, 21, 0.8); }
+    }
+    
+    @keyframes bulb-on {
+      0% { filter: brightness(0.3); }
+      100% { filter: brightness(1); }
+    }
+    
+    .bulb-on { animation: bulb-on 0.3s ease forwards, pulse-glow 2s ease-in-out infinite; }
+    .bulb-off { filter: brightness(0.3); }
+    
+    @keyframes bubble {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) scale(1.1); }
+    }
+    
+    .bubble-animate { animation: bubble 2s ease-in-out infinite; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    
+    .float { animation: float 3s ease-in-out infinite; }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #1e3a5f 100%);
+    }
+    
+    .progress-bar {
+      transition: width 0.3s ease;
+    }
+    
+    .teacher-note {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid #f59e0b;
+    }
+    
+    .quiz-option {
+      transition: all 0.2s ease;
+    }
+    
+    .quiz-option:hover:not(.selected):not(.disabled) {
+      transform: translateX(5px);
+      background: #e0f2fe;
+    }
+    
+    .quiz-option.correct {
+      background: #dcfce7 !important;
+      border-color: #22c55e !important;
+    }
+    
+    .quiz-option.incorrect {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+    }
+    
+    .ion-particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: ionMove 3s ease-in-out infinite;
+    }
+    
+    @keyframes ionMove {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(20px, -10px); }
+      50% { transform: translate(-10px, 20px); }
+      75% { transform: translate(-20px, -15px); }
+    }
+    
+    .demo-beaker {
+      background: linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.3) 100%);
+      border: 3px solid #64748b;
+      border-top: none;
+      border-radius: 0 0 20px 20px;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full gradient-bg overflow-auto">
+  <div id="app" class="h-full w-full p-4 md:p-6"><!-- Progress Bar -->
+   <div class="fixed top-0 left-0 right-0 h-1 bg-white/20 z-50">
+    <div id="progress" class="progress-bar h-full bg-yellow-400" style="width: 0%"></div>
+   </div><!-- Navigation -->
+   <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-3 bg-white/95 rounded-full px-4 py-2 shadow-xl"><button onclick="prevSlide()" class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors">
+     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+     </svg></button> <span id="slideCounter" class="text-sm font-semibold text-gray-700 min-w-[60px] text-center">1 / 12</span> <button onclick="nextSlide()" class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors">
+     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+     </svg></button> <button onclick="toggleTeacherNotes()" class="ml-2 w-10 h-10 rounded-full bg-amber-500 text-white flex items-center justify-center hover:bg-amber-600 transition-colors" title="Catatan Guru">
+     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+     </svg></button>
+   </div><!-- Slide Container -->
+   <div id="slideContainer" class="max-w-4xl mx-auto pb-20"><!-- Slide 1: Cover -->
+    <div class="slide active" data-slide="1">
+     <div class="glass-card rounded-3xl p-8 md:p-12 text-center min-h-[500px] flex flex-col justify-center">
+      <div class="mb-6"><span class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">Kimia Kelas X SMA</span>
+      </div>
+      <h1 id="mainTitle" class="title-font text-3xl md:text-5xl font-extrabold text-gray-800 mb-4 leading-tight">Larutan Elektrolit<br>
+        &amp; Non Elektrolit</h1>
+      <p class="text-gray-600 text-lg mb-8">Memahami Sifat Larutan Penghantar Listrik</p>
+      <div class="flex justify-center gap-8 my-8">
+       <div class="text-center float" style="animation-delay: 0s;">
+        <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center text-4xl shadow-lg">
+         💡
+        </div>
+        <p class="mt-2 text-sm text-gray-600">Lampu Menyala</p>
+       </div>
+       <div class="text-center float" style="animation-delay: 0.5s;">
+        <div class="w-20 h-20 bg-blue-400 rounded-full flex items-center justify-center text-4xl shadow-lg">
+         🧪
+        </div>
+        <p class="mt-2 text-sm text-gray-600">Larutan</p>
+       </div>
+       <div class="text-center float" style="animation-delay: 1s;">
+        <div class="w-20 h-20 bg-green-400 rounded-full flex items-center justify-center text-4xl shadow-lg">
+         ⚡
+        </div>
+        <p class="mt-2 text-sm text-gray-600">Listrik</p>
+       </div>
+      </div>
+      <p id="teacherName" class="text-gray-500 mt-4">Oleh: Prima Fera (230331601202)</p>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="1">
+      <p class="font-bold text-amber-800 mb-2">📝 Catatan Guru:</p>
+      <p class="text-amber-900 text-sm">"Selamat pagi anak-anak! Hari ini kita akan belajar tentang larutan yang sangat menarik. Pernahkah kalian bertanya kenapa ada air yang bisa menghantarkan listrik dan ada yang tidak? Mari kita temukan jawabannya bersama!"</p>
+     </div>
+    </div><!-- Slide 2: Apersepsi -->
+    <div class="slide" data-slide="2">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center text-white text-xl">🤔</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Apersepsi</h2>
+      </div>
+      <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 mb-6">
+       <p class="text-xl text-gray-700 font-medium text-center">"Pernahkah kalian melihat peringatan<br><span class="text-red-600 font-bold text-2xl">⚠️ BAHAYA! Jangan menyentuh listrik dengan tangan basah?</span>"</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+       <div class="bg-white rounded-xl p-5 border-2 border-blue-200 hover:border-blue-400 transition-colors cursor-pointer" onclick="this.classList.toggle('bg-blue-50')">
+        <div class="text-3xl mb-2">
+         🚿
+        </div>
+        <p class="font-semibold text-gray-800">Mengapa berbahaya menyentuh saklar dengan tangan basah?</p>
+       </div>
+       <div class="bg-white rounded-xl p-5 border-2 border-green-200 hover:border-green-400 transition-colors cursor-pointer" onclick="this.classList.toggle('bg-green-50')">
+        <div class="text-3xl mb-2">
+         🏊
+        </div>
+        <p class="font-semibold text-gray-800">Mengapa ada peringatan "dilarang berenang saat hujan petir"?</p>
+       </div>
+      </div>
+      <div class="bg-yellow-50 rounded-xl p-4 border-l-4 border-yellow-400">
+       <p class="text-gray-700">💡 <strong>Petunjuk:</strong> Semua ini berkaitan dengan kemampuan air dan zat terlarut untuk menghantarkan listrik!</p>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="2">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Coba angkat tangan siapa yang pernah melihat peringatan ini? Nah, mengapa ya kira-kira? Air murni sebenarnya tidak menghantarkan listrik lho, tapi kenapa air keran atau air kolam bisa berbahaya? Inilah yang akan kita pelajari hari ini - tentang larutan yang bisa dan tidak bisa menghantarkan listrik!"</p>
+     </div>
+    </div><!-- Slide 3: Tujuan Pembelajaran -->
+    <div class="slide" data-slide="3">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white text-xl">🎯</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Tujuan Pembelajaran</h2>
+      </div>
+      <p class="text-gray-600 mb-6">Setelah mempelajari materi ini, kalian diharapkan mampu:</p>
+      <div class="space-y-4">
+       <div class="flex items-start gap-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4 transform hover:scale-[1.02] transition-transform"><span class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold shrink-0">1</span>
+        <p class="text-gray-700"><strong>Menjelaskan</strong> pengertian larutan elektrolit dan non elektrolit</p>
+       </div>
+       <div class="flex items-start gap-4 bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-4 transform hover:scale-[1.02] transition-transform"><span class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold shrink-0">2</span>
+        <p class="text-gray-700"><strong>Membedakan</strong> ciri-ciri larutan elektrolit dan non elektrolit berdasarkan daya hantar listriknya</p>
+       </div>
+       <div class="flex items-start gap-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-4 transform hover:scale-[1.02] transition-transform"><span class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold shrink-0">3</span>
+        <p class="text-gray-700"><strong>Menjelaskan</strong> proses ionisasi/disosiasi pada larutan elektrolit</p>
+       </div>
+       <div class="flex items-start gap-4 bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-4 transform hover:scale-[1.02] transition-transform"><span class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold shrink-0">4</span>
+        <p class="text-gray-700"><strong>Mengklasifikasikan</strong> larutan ke dalam elektrolit kuat, lemah, dan non elektrolit</p>
+       </div>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="3">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Inilah 4 hal utama yang akan kalian kuasai setelah pembelajaran ini. Coba perhatikan kata kunci di setiap poinnya: menjelaskan, membedakan, dan mengklasifikasikan. Di akhir pembelajaran, saya akan mengecek apakah kalian sudah mencapai tujuan-tujuan ini ya!"</p>
+     </div>
+    </div><!-- Slide 4: Pengertian -->
+    <div class="slide" data-slide="4">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xl">📚</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Apa itu Larutan Elektrolit?</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6"><!-- Elektrolit -->
+       <div class="bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl p-6 text-white">
+        <div class="text-center mb-4">
+         <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3"><span class="text-4xl">⚡</span>
+         </div>
+         <h3 class="text-xl font-bold">Larutan ELEKTROLIT</h3>
+        </div>
+        <div class="bg-white/20 rounded-xl p-4">
+         <p class="text-center">Larutan yang <strong>DAPAT</strong> menghantarkan arus listrik</p>
+        </div>
+        <div class="mt-4 text-center text-sm opacity-90">
+         <p>💡 Lampu menyala</p>
+         <p>🫧 Ada/tidak ada gelembung</p>
+        </div>
+       </div><!-- Non Elektrolit -->
+       <div class="bg-gradient-to-br from-red-400 to-rose-500 rounded-2xl p-6 text-white">
+        <div class="text-center mb-4">
+         <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3"><span class="text-4xl">🚫</span>
+         </div>
+         <h3 class="text-xl font-bold">Larutan NON ELEKTROLIT</h3>
+        </div>
+        <div class="bg-white/20 rounded-xl p-4">
+         <p class="text-center">Larutan yang <strong>TIDAK DAPAT</strong> menghantarkan arus listrik</p>
+        </div>
+        <div class="mt-4 text-center text-sm opacity-90">
+         <p>💡 Lampu tidak menyala</p>
+         <p>🫧 Tidak ada gelembung</p>
+        </div>
+       </div>
+      </div>
+      <div class="mt-6 bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
+       <p class="text-center text-gray-700"><strong>🔑 Kunci Utama:</strong> Kemampuan menghantarkan listrik ditentukan oleh ada tidaknya <span class="bg-yellow-200 px-2 py-1 rounded font-bold">ION BEBAS</span> dalam larutan</p>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="4">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Jadi intinya sederhana: elektrolit = bisa hantar listrik, non elektrolit = tidak bisa. Nah, yang menentukan bisa atau tidaknya adalah ION. Apa itu ion? Ion adalah atom atau molekul yang bermuatan listrik. Kalau dalam larutan ada ion yang bergerak bebas, listrik bisa mengalir. Kalau tidak ada ion, listrik tidak bisa lewat."</p>
+     </div>
+    </div><!-- Slide 5: Konsep Ionisasi -->
+    <div class="slide" data-slide="5">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center text-white text-xl">⚛️</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Mengapa Bisa Menghantarkan Listrik?</h2>
+      </div>
+      <p class="text-gray-600 mb-6 text-center">Rahasianya ada pada proses <strong>IONISASI</strong> dan <strong>DISOSIASI</strong></p>
+      <div class="grid md:grid-cols-2 gap-6 mb-6"><!-- Ionisasi -->
+       <div class="bg-white rounded-2xl p-5 border-2 border-purple-300 shadow-lg">
+        <h3 class="font-bold text-purple-700 text-lg mb-3 flex items-center gap-2"><span class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">🔬</span> IONISASI</h3>
+        <p class="text-gray-600 text-sm mb-3">Pembentukan ion dari senyawa kovalen polar saat dilarutkan dalam air</p>
+        <div class="bg-purple-50 rounded-xl p-3 font-mono text-center">
+         <p class="text-purple-800">HCl → H<sup>+</sup> + Cl<sup>-</sup></p>
+         <p class="text-xs text-gray-500 mt-1">(molekul → ion)</p>
+        </div>
+       </div><!-- Disosiasi -->
+       <div class="bg-white rounded-2xl p-5 border-2 border-blue-300 shadow-lg">
+        <h3 class="font-bold text-blue-700 text-lg mb-3 flex items-center gap-2"><span class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">💎</span> DISOSIASI</h3>
+        <p class="text-gray-600 text-sm mb-3">Penguraian ion-ion yang sudah ada dalam senyawa ionik</p>
+        <div class="bg-blue-50 rounded-xl p-3 font-mono text-center">
+         <p class="text-blue-800">NaCl → Na<sup>+</sup> + Cl<sup>-</sup></p>
+         <p class="text-xs text-gray-500 mt-1">(kristal ion → ion bebas)</p>
+        </div>
+       </div>
+      </div><!-- Visual Animation -->
+      <div class="bg-gray-100 rounded-2xl p-6 relative overflow-hidden" id="ionAnimation">
+       <p class="text-center text-gray-500 mb-4 text-sm">Klik untuk melihat animasi ion dalam larutan:</p>
+       <div class="flex justify-center gap-8"><button onclick="showIonAnimation('elektrolit')" class="px-6 py-3 bg-green-500 text-white rounded-xl font-semibold hover:bg-green-600 transition-colors"> ⚡ Elektrolit </button> <button onclick="showIonAnimation('nonelektrolit')" class="px-6 py-3 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 transition-colors"> 🚫 Non Elektrolit </button>
+       </div>
+       <div id="ionVisual" class="mt-4 h-32 relative hidden"><!-- Animation will be inserted here -->
+       </div>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="5">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Ada dua istilah penting: IONISASI untuk senyawa kovalen seperti HCl yang awalnya berbentuk molekul lalu berubah jadi ion saat larut. Dan DISOSIASI untuk senyawa ionik seperti NaCl yang memang sudah berbentuk ion dalam kristalnya, lalu terpisah saat larut dalam air. Intinya sama: menghasilkan ion bebas yang bisa menghantarkan listrik!"</p>
+     </div>
+    </div><!-- Slide 6: Elektrolit Kuat vs Lemah -->
+    <div class="slide" data-slide="6">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center text-white text-xl">💪</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Elektrolit Kuat vs Lemah</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6"><!-- Elektrolit Kuat -->
+       <div class="bg-white rounded-2xl overflow-hidden shadow-lg border-2 border-green-400">
+        <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-4 text-white">
+         <h3 class="text-xl font-bold text-center">⚡ ELEKTROLIT KUAT</h3>
+        </div>
+        <div class="p-5">
+         <div class="flex items-center justify-center gap-4 mb-4">
+          <div class="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center text-3xl shadow-lg bulb-on">
+           💡
+          </div><span class="text-green-600 font-bold">TERANG!</span>
+         </div>
+         <ul class="space-y-2 text-sm text-gray-700">
+          <li class="flex items-start gap-2"><span class="text-green-500">✓</span> <span>Terionisasi <strong>sempurna</strong> (100%)</span></li>
+          <li class="flex items-start gap-2"><span class="text-green-500">✓</span> <span>Lampu menyala <strong>terang</strong></span></li>
+          <li class="flex items-start gap-2"><span class="text-green-500">✓</span> <span>Gelembung gas <strong>banyak</strong></span></li>
+         </ul>
+         <div class="mt-4 bg-green-50 rounded-xl p-3 font-mono text-sm text-center">
+          <p>HCl → H<sup>+</sup> + Cl<sup>-</sup></p>
+          <p class="text-green-600 text-xs">(reaksi satu arah →)</p>
+         </div>
+        </div>
+       </div><!-- Elektrolit Lemah -->
+       <div class="bg-white rounded-2xl overflow-hidden shadow-lg border-2 border-yellow-400">
+        <div class="bg-gradient-to-r from-yellow-500 to-orange-500 p-4 text-white">
+         <h3 class="text-xl font-bold text-center">💫 ELEKTROLIT LEMAH</h3>
+        </div>
+        <div class="p-5">
+         <div class="flex items-center justify-center gap-4 mb-4">
+          <div class="w-16 h-16 bg-yellow-200 rounded-full flex items-center justify-center text-3xl shadow-lg opacity-60">
+           💡
+          </div><span class="text-yellow-600 font-bold">REDUP...</span>
+         </div>
+         <ul class="space-y-2 text-sm text-gray-700">
+          <li class="flex items-start gap-2"><span class="text-yellow-500">◐</span> <span>Terionisasi <strong>sebagian</strong></span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-500">◐</span> <span>Lampu menyala <strong>redup</strong></span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-500">◐</span> <span>Gelembung gas <strong>sedikit</strong></span></li>
+         </ul>
+         <div class="mt-4 bg-yellow-50 rounded-xl p-3 font-mono text-sm text-center">
+          <p>CH₃COOH ⇌ CH₃COO<sup>-</sup> + H<sup>+</sup></p>
+          <p class="text-yellow-600 text-xs">(reaksi dua arah ⇌)</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="mt-6 bg-blue-50 rounded-xl p-4 text-center">
+       <p class="text-gray-700"><strong>💡 Ingat:</strong> Panah satu arah (→) = terurai sempurna | Panah dua arah (⇌) = setimbang/sebagian</p>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="6">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Nah, elektrolit juga ada tingkatannya. Yang KUAT seperti HCl itu terurainya 100%, semua molekul jadi ion. Makanya lampunya terang sekali. Kalau yang LEMAH seperti cuka (CH₃COOH), hanya sebagian yang jadi ion, sisanya masih berbentuk molekul. Makanya lampunya redup. Ciri mudahnya: lihat panah reaksinya!"</p>
+     </div>
+    </div><!-- Slide 7: Tabel Perbandingan -->
+    <div class="slide" data-slide="7">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center text-white text-xl">📊</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Tabel Perbandingan</h2>
+      </div>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm">
+        <thead>
+         <tr>
+          <th class="bg-gray-800 text-white p-3 rounded-tl-xl">Aspek</th>
+          <th class="bg-green-600 text-white p-3">Elektrolit Kuat</th>
+          <th class="bg-yellow-500 text-white p-3">Elektrolit Lemah</th>
+          <th class="bg-red-500 text-white p-3 rounded-tr-xl">Non Elektrolit</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr class="bg-white">
+          <td class="p-3 border font-semibold">💡 Lampu</td>
+          <td class="p-3 border text-center bg-green-50">Menyala TERANG</td>
+          <td class="p-3 border text-center bg-yellow-50">Menyala REDUP</td>
+          <td class="p-3 border text-center bg-red-50">TIDAK menyala</td>
+         </tr>
+         <tr class="bg-gray-50">
+          <td class="p-3 border font-semibold">🫧 Gelembung</td>
+          <td class="p-3 border text-center">Banyak</td>
+          <td class="p-3 border text-center">Sedikit</td>
+          <td class="p-3 border text-center">Tidak ada</td>
+         </tr>
+         <tr class="bg-white">
+          <td class="p-3 border font-semibold">⚛️ Ionisasi</td>
+          <td class="p-3 border text-center">Sempurna (100%)</td>
+          <td class="p-3 border text-center">Sebagian</td>
+          <td class="p-3 border text-center">Tidak terionisasi</td>
+         </tr>
+         <tr class="bg-gray-50">
+          <td class="p-3 border font-semibold">🔬 Ion</td>
+          <td class="p-3 border text-center">Sangat banyak</td>
+          <td class="p-3 border text-center">Sedikit</td>
+          <td class="p-3 border text-center">Tidak ada</td>
+         </tr>
+         <tr class="bg-white">
+          <td class="p-3 border font-semibold rounded-bl-xl">📝 Contoh</td>
+          <td class="p-3 border text-center text-xs">HCl, NaCl, H₂SO₄, NaOH</td>
+          <td class="p-3 border text-center text-xs">CH₃COOH, NH₃, H₂CO₃</td>
+          <td class="p-3 border text-center text-xs rounded-br-xl">Gula, Alkohol, Urea</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="mt-6 grid grid-cols-3 gap-3 text-center text-xs">
+       <div class="bg-green-100 rounded-xl p-3">
+        <p class="font-bold text-green-700">Elektrolit Kuat</p>
+        <p class="text-green-600">α = 1 (sempurna)</p>
+       </div>
+       <div class="bg-yellow-100 rounded-xl p-3">
+        <p class="font-bold text-yellow-700">Elektrolit Lemah</p>
+        <p class="text-yellow-600">0 &lt; α &lt; 1</p>
+       </div>
+       <div class="bg-red-100 rounded-xl p-3">
+        <p class="font-bold text-red-700">Non Elektrolit</p>
+        <p class="text-red-600">α = 0</p>
+       </div>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="7">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Tabel ini sangat penting untuk kalian hafal! Perhatikan perbedaan ketiga jenis larutan dari berbagai aspek. Alpha (α) itu derajat ionisasi - seberapa banyak yang terurai jadi ion. Elektrolit kuat α-nya 1 atau 100%, lemah antara 0-1, non elektrolit α-nya 0 atau tidak terionisasi sama sekali."</p>
+     </div>
+    </div><!-- Slide 8: Contoh Sehari-hari -->
+    <div class="slide" data-slide="8">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center text-white text-xl">🏠</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Contoh dalam Kehidupan Sehari-hari</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4"><!-- Elektrolit Kuat -->
+       <div class="bg-gradient-to-b from-green-100 to-green-50 rounded-2xl p-4">
+        <div class="text-center mb-3"><span class="inline-block px-3 py-1 bg-green-500 text-white rounded-full text-sm font-bold">⚡ Elektrolit Kuat</span>
+        </div>
+        <div class="space-y-3">
+         <div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"><span class="text-2xl">🧂</span>
+          <div>
+           <p class="font-semibold text-gray-800">Garam dapur</p>
+           <p class="text-xs text-gray-500">NaCl</p>
+          </div>
+         </div>
+         <div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"><span class="text-2xl">🔋</span>
+          <div>
+           <p class="font-semibold text-gray-800">Air aki</p>
+           <p class="text-xs text-gray-500">H₂SO₄</p>
+          </div>
+         </div>
+         <div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"><span class="text-2xl">🧹</span>
+          <div>
+           <p class="font-semibold text-gray-800">Pembersih kamar mandi</p>
+           <p class="text-xs text-gray-500">HCl</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Elektrolit Lemah -->
+       <div class="bg-gradient-to-b from-yellow-100 to-yellow-50 rounded-2xl p-4">
+        <div class="text-center mb-3"><span class="inline-block px-3 py-1 bg-yellow-500 text-white rounded-full text-sm font-bold">💫 Elektrolit Lemah</span>
+        </div>
+        <div class="space-y-3">
+         <div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"><span class="text-2xl">🍶</span>
+          <div>
+           <p class="font-semibold text-gray-800">Cuka dapur</p>
+           <p class="text-xs text-gray-500">CH₃COOH</p>
+          </div>
+         </div>
+         <div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"><span class="text-2xl">🍋</span>
+          <div>
+           <p class="font-semibold text-gray-800">Air jeruk</p>
+           <p class="text-xs text-gray-500">Asam sitrat</p>
+          </div>
+         </div>
+         <div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"><span class="text-2xl">🧴</span>
+          <div>
+           <p class="font-semibold text-gray-800">Ammonia</p>
+           <p class="text-xs text-gray-500">NH₃</p>
+          </div>
+         </div>
+        </div>
+       </div><!-- Non Elektrolit -->
+       <div class="bg-gradient-to-b from-red-100 to-red-50 rounded-2xl p-4">
+        <div class="text-center mb-3"><span class="inline-block px-3 py-1 bg-red-500 text-white rounded-full text-sm font-bold">🚫 Non Elektrolit</span>
+        </div>
+        <div class="space-y-3">
+         <div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"><span class="text-2xl">🍬</span>
+          <div>
+           <p class="font-semibold text-gray-800">Larutan gula</p>
+           <p class="text-xs text-gray-500">C₁₂H₂₂O₁₁</p>
+          </div>
+         </div>
+         <div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"><span class="text-2xl">🍺</span>
+          <div>
+           <p class="font-semibold text-gray-800">Alkohol</p>
+           <p class="text-xs text-gray-500">C₂H₅OH</p>
+          </div>
+         </div>
+         <div class="bg-white rounded-xl p-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"><span class="text-2xl">💧</span>
+          <div>
+           <p class="font-semibold text-gray-800">Air murni</p>
+           <p class="text-xs text-gray-500">H₂O</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="mt-6 bg-blue-50 rounded-xl p-4">
+       <p class="text-center text-gray-700 text-sm"><strong>💡 Fun Fact:</strong> Air keran bisa menghantarkan listrik karena mengandung mineral terlarut (ion), sedangkan air murni/aquades tidak!</p>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="8">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Lihat, ternyata bahan-bahan di rumah kalian banyak yang termasuk elektrolit! Garam yang kalian pakai memasak, cuka, bahkan pembersih toilet. Nah, ini menjawab pertanyaan di awal tadi - mengapa air keran berbahaya kalau kena listrik? Karena air keran mengandung mineral atau garam terlarut yang membuatnya jadi elektrolit!"</p>
+     </div>
+    </div><!-- Slide 9: Demonstrasi Interaktif -->
+    <div class="slide" data-slide="9">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-pink-500 rounded-xl flex items-center justify-center text-white text-xl">🧪</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Demo Virtual: Uji Daya Hantar Listrik</h2>
+      </div>
+      <p class="text-gray-600 mb-6 text-center">Pilih larutan dan lihat apa yang terjadi pada lampu dan elektroda!</p>
+      <div class="grid md:grid-cols-2 gap-6"><!-- Alat Demo -->
+       <div class="bg-gray-900 rounded-2xl p-6 relative">
+        <div class="text-center text-white mb-4">
+         <p class="text-sm opacity-70">Alat Uji Elektrolit</p>
+        </div><!-- Lampu -->
+        <div class="flex justify-center mb-4">
+         <div id="demoBulb" class="w-20 h-20 bg-gray-600 rounded-full flex items-center justify-center text-4xl transition-all duration-500 bulb-off">
+          💡
+         </div>
+        </div><!-- Beaker -->
+        <div class="relative mx-auto w-40 h-32">
+         <div id="demoBeaker" class="demo-beaker w-full h-full relative overflow-hidden">
+          <div id="demoLiquid" class="absolute bottom-0 left-0 right-0 h-3/4 bg-blue-300/50 transition-colors duration-500"></div>
+          <div id="demoBubbles" class="absolute bottom-0 left-0 right-0 h-full pointer-events-none"></div><!-- Elektroda -->
+          <div class="absolute top-0 left-6 w-2 h-20 bg-gray-400 rounded-b"></div>
+          <div class="absolute top-0 right-6 w-2 h-20 bg-gray-400 rounded-b"></div>
+         </div>
+        </div><!-- Result Text -->
+        <div id="demoResult" class="mt-4 text-center text-white">
+         <p class="text-sm opacity-70">Pilih larutan di samping →</p>
+        </div>
+       </div><!-- Pilihan Larutan -->
+       <div class="space-y-3">
+        <p class="font-semibold text-gray-700 mb-2">Pilih Larutan:</p><button onclick="testSolution('nacl')" class="w-full bg-white rounded-xl p-4 flex items-center gap-4 border-2 border-gray-200 hover:border-green-400 transition-colors text-left"> <span class="text-2xl">🧂</span>
+         <div>
+          <p class="font-semibold">Larutan NaCl (Garam)</p>
+          <p class="text-xs text-gray-500">Elektrolit Kuat</p>
+         </div></button> <button onclick="testSolution('cuka')" class="w-full bg-white rounded-xl p-4 flex items-center gap-4 border-2 border-gray-200 hover:border-yellow-400 transition-colors text-left"> <span class="text-2xl">🍶</span>
+         <div>
+          <p class="font-semibold">Larutan Cuka</p>
+          <p class="text-xs text-gray-500">Elektrolit Lemah</p>
+         </div></button> <button onclick="testSolution('gula')" class="w-full bg-white rounded-xl p-4 flex items-center gap-4 border-2 border-gray-200 hover:border-red-400 transition-colors text-left"> <span class="text-2xl">🍬</span>
+         <div>
+          <p class="font-semibold">Larutan Gula</p>
+          <p class="text-xs text-gray-500">Non Elektrolit</p>
+         </div></button> <button onclick="testSolution('aquades')" class="w-full bg-white rounded-xl p-4 flex items-center gap-4 border-2 border-gray-200 hover:border-blue-400 transition-colors text-left"> <span class="text-2xl">💧</span>
+         <div>
+          <p class="font-semibold">Aquades (Air Murni)</p>
+          <p class="text-xs text-gray-500">Non Elektrolit</p>
+         </div></button>
+       </div>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="9">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru (untuk demo langsung):</p>
+      <p class="text-amber-900 text-sm">"Sekarang kita akan melakukan percobaan virtual! Dalam praktikum nyata, kita menggunakan alat uji elektrolit yang terdiri dari baterai, lampu, dan dua elektroda yang dicelupkan ke larutan. Mari kita uji beberapa larutan dan amati perbedaannya. Coba tebak dulu sebelum saya klik - apa yang akan terjadi?"</p>
+      <p class="text-amber-900 text-sm mt-2"><strong>Jika demo langsung:</strong> Siapkan gelas kimia berisi larutan garam, cuka, gula, dan aquades. Celupkan elektroda ke masing-masing dan amati lampu.</p>
+     </div>
+    </div><!-- Slide 10: Rangkuman -->
+    <div class="slide" data-slide="10">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-white text-xl">📋</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Rangkuman Materi</h2>
+      </div>
+      <div class="space-y-4">
+       <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-4 text-white">
+        <div class="flex items-start gap-3"><span class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center shrink-0">1</span>
+         <div>
+          <p class="font-semibold">Larutan Elektrolit vs Non Elektrolit</p>
+          <p class="text-sm opacity-90">Elektrolit dapat menghantarkan listrik karena mengandung ion bebas, non elektrolit tidak.</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-4 text-white">
+        <div class="flex items-start gap-3"><span class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center shrink-0">2</span>
+         <div>
+          <p class="font-semibold">Proses Pembentukan Ion</p>
+          <p class="text-sm opacity-90">Ionisasi (senyawa kovalen → ion) dan Disosiasi (senyawa ionik → ion bebas)</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-4 text-white">
+        <div class="flex items-start gap-3"><span class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center shrink-0">3</span>
+         <div>
+          <p class="font-semibold">Elektrolit Kuat vs Lemah</p>
+          <p class="text-sm opacity-90">Kuat: ionisasi sempurna (→), lampu terang | Lemah: ionisasi sebagian (⇌), lampu redup</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-4 text-white">
+        <div class="flex items-start gap-3"><span class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center shrink-0">4</span>
+         <div>
+          <p class="font-semibold">Ciri-ciri Pengujian</p>
+          <p class="text-sm opacity-90">Elektrolit: lampu menyala + gelembung | Non elektrolit: tidak ada perubahan</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="mt-6 bg-yellow-50 border-2 border-yellow-300 rounded-xl p-4">
+       <p class="text-center font-semibold text-yellow-800">🎯 Kata Kunci: ION BEBAS = Kunci Daya Hantar Listrik!</p>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="10">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Mari kita rangkum apa yang sudah kita pelajari. Ada 4 poin penting yang harus kalian ingat. Yang paling penting adalah: keberadaan ION BEBAS menentukan apakah larutan bisa menghantarkan listrik atau tidak. Apakah ada pertanyaan sebelum kita lanjut ke kuis?"</p>
+     </div>
+    </div><!-- Slide 11: Game/Kuis -->
+    <div class="slide" data-slide="11">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px]">
+      <div class="flex items-center gap-3 mb-6"><span class="w-10 h-10 bg-rose-500 rounded-xl flex items-center justify-center text-white text-xl">🎮</span>
+       <h2 class="title-font text-2xl md:text-3xl font-bold text-gray-800">Game: Tebak Lampunya! 💡</h2>
+      </div>
+      <div id="quizContainer"><!-- Quiz Header -->
+       <div class="flex justify-between items-center mb-6">
+        <div class="flex items-center gap-2"><span class="text-sm text-gray-600">Soal:</span> <span id="questionNum" class="font-bold text-blue-600">1</span> <span class="text-gray-400">/</span> <span class="text-gray-600">5</span>
+        </div>
+        <div class="flex items-center gap-2"><span class="text-sm text-gray-600">Skor:</span> <span id="score" class="font-bold text-green-600">0</span>
+        </div>
+       </div><!-- Question -->
+       <div id="questionBox" class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-6 text-white mb-6">
+        <p id="questionText" class="text-lg font-medium text-center">Larutan NaCl diuji dengan alat uji elektrolit. Bagaimana hasil pengujiannya?</p>
+       </div><!-- Options -->
+       <div id="optionsContainer" class="space-y-3"><!-- Options will be dynamically inserted -->
+       </div><!-- Feedback -->
+       <div id="feedback" class="hidden mt-4 rounded-xl p-4 text-center">
+        <p id="feedbackText" class="font-semibold"></p>
+        <p id="feedbackExplanation" class="text-sm mt-2"></p>
+       </div><!-- Next Button --> <button id="nextBtn" onclick="nextQuestion()" class="hidden w-full mt-4 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors"> Soal Berikutnya → </button>
+      </div><!-- Quiz Result -->
+      <div id="quizResult" class="hidden text-center py-8">
+       <div class="text-6xl mb-4">
+        🏆
+       </div>
+       <h3 class="text-2xl font-bold text-gray-800 mb-2">Selamat!</h3>
+       <p class="text-gray-600 mb-4">Kuis telah selesai</p>
+       <div class="inline-block bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-8 py-4 rounded-2xl">
+        <p class="text-sm opacity-90">Skor Akhir</p>
+        <p id="finalScore" class="text-4xl font-bold">0/5</p>
+       </div><button onclick="restartQuiz()" class="block w-full mt-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors"> 🔄 Ulangi Kuis </button>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="11">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Sekarang waktunya kuis! Saya akan menampilkan 5 soal, dan kalian harus menjawab dengan cepat dan tepat. Setiap jawaban benar mendapat poin. Siapa yang bisa mendapat skor sempurna? Ayo kita mulai!"</p>
+      <p class="text-amber-900 text-sm mt-2"><strong>Tips:</strong> Bisa dijadikan kompetisi kelompok dengan mencatat skor masing-masing kelompok.</p>
+     </div>
+    </div><!-- Slide 12: Penutup -->
+    <div class="slide" data-slide="12">
+     <div class="glass-card rounded-3xl p-8 min-h-[500px] flex flex-col justify-center">
+      <div class="text-center">
+       <div class="text-6xl mb-6">
+        🎉
+       </div>
+       <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">Terima Kasih!</h2>
+       <p class="text-gray-600 text-lg mb-8">Semoga pembelajaran hari ini bermanfaat</p>
+       <div class="bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl p-6 mb-8 max-w-md mx-auto">
+        <h3 class="font-bold text-gray-800 mb-3">📝 Refleksi</h3>
+        <p class="text-gray-700 text-sm">Apa satu hal baru yang kalian pelajari hari ini tentang larutan elektrolit dan non elektrolit?</p>
+       </div>
+       <div class="flex justify-center gap-4 flex-wrap">
+        <div class="bg-white rounded-xl px-6 py-3 shadow-md">
+         <p class="text-sm text-gray-500">Kata Kunci</p>
+         <p class="font-bold text-blue-600">ION BEBAS</p>
+        </div>
+        <div class="bg-white rounded-xl px-6 py-3 shadow-md">
+         <p class="text-sm text-gray-500">Elektrolit Kuat</p>
+         <p class="font-bold text-green-600">💡 TERANG</p>
+        </div>
+        <div class="bg-white rounded-xl px-6 py-3 shadow-md">
+         <p class="text-sm text-gray-500">Elektrolit Lemah</p>
+         <p class="font-bold text-yellow-600">💡 REDUP</p>
+        </div>
+        <div class="bg-white rounded-xl px-6 py-3 shadow-md">
+         <p class="text-sm text-gray-500">Non Elektrolit</p>
+         <p class="font-bold text-red-600">💡 MATI</p>
+        </div>
+       </div>
+       <p class="mt-8 text-gray-500 text-sm">"Belajar adalah perjalanan, bukan tujuan" 🚀</p>
+      </div>
+     </div>
+     <div class="teacher-note rounded-xl p-4 mt-4 hidden" data-note="12">
+      <p class="font-bold text-amber-800 mb-2">📝 Script Guru:</p>
+      <p class="text-amber-900 text-sm">"Baik anak-anak, pembelajaran kita hari ini sudah selesai. Sebelum kita akhiri, coba tuliskan di buku kalian satu hal baru yang kalian pelajari hari ini. Ingat selalu: ION BEBAS adalah kunci mengapa larutan bisa menghantarkan listrik. Terima kasih atas partisipasi kalian yang luar biasa! Sampai jumpa di pertemuan berikutnya!"</p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      main_title: 'Larutan Elektrolit & Non Elektrolit',
+      teacher_name: 'Prima Fera (230331601202)',
+      primary_color: '#1e3a5f',
+      secondary_color: '#f59e0b',
+      text_color: '#1f2937',
+      accent_color: '#3b82f6',
+      surface_color: '#ffffff'
+    };
+    
+    let config = { ...defaultConfig };
+    let currentSlide = 1;
+    const totalSlides = 12;
+    let showNotes = false;
+    
+    // Quiz data
+    const quizData = [
+      {
+        question: "Larutan NaCl diuji dengan alat uji elektrolit. Bagaimana hasil pengujiannya?",
+        options: [
+          "Lampu menyala terang, ada gelembung banyak",
+          "Lampu menyala redup, ada gelembung sedikit",
+          "Lampu tidak menyala, tidak ada gelembung",
+          "Lampu menyala terang, tidak ada gelembung"
+        ],
+        correct: 0,
+        explanation: "NaCl adalah elektrolit KUAT yang terionisasi sempurna, sehingga lampu menyala TERANG dan ada banyak gelembung gas."
+      },
+      {
+        question: "Manakah yang termasuk larutan NON ELEKTROLIT?",
+        options: [
+          "Air aki (H₂SO₄)",
+          "Air garam (NaCl)",
+          "Air gula (C₁₂H₂₂O₁₁)",
+          "Air cuka (CH₃COOH)"
+        ],
+        correct: 2,
+        explanation: "Air gula adalah NON ELEKTROLIT karena gula (C₁₂H₂₂O₁₁) tidak terionisasi saat larut dalam air - tetap berupa molekul."
+      },
+      {
+        question: "Apa perbedaan IONISASI dan DISOSIASI?",
+        options: [
+          "Tidak ada perbedaan, keduanya sama",
+          "Ionisasi untuk senyawa ionik, disosiasi untuk senyawa kovalen",
+          "Ionisasi untuk senyawa kovalen polar, disosiasi untuk senyawa ionik",
+          "Ionisasi terjadi di padatan, disosiasi terjadi di larutan"
+        ],
+        correct: 2,
+        explanation: "IONISASI = pembentukan ion dari senyawa kovalen polar (contoh: HCl). DISOSIASI = penguraian ion dari senyawa ionik (contoh: NaCl)."
+      },
+      {
+        question: "Larutan CH₃COOH (cuka) saat diuji lampunya menyala REDUP. Ini menunjukkan bahwa cuka adalah...",
+        options: [
+          "Elektrolit kuat",
+          "Elektrolit lemah",
+          "Non elektrolit",
+          "Bukan larutan"
+        ],
+        correct: 1,
+        explanation: "Lampu redup menunjukkan ELEKTROLIT LEMAH - hanya sebagian molekul yang terionisasi (dilambangkan dengan ⇌)."
+      },
+      {
+        question: "Mengapa aquades (air murni) tidak dapat menghantarkan listrik?",
+        options: [
+          "Karena airnya terlalu dingin",
+          "Karena tidak mengandung ion bebas",
+          "Karena mengandung terlalu banyak ion",
+          "Karena molekul airnya terlalu besar"
+        ],
+        correct: 1,
+        explanation: "Aquades tidak dapat menghantarkan listrik karena TIDAK MENGANDUNG ION BEBAS. Air murni hanya terdiri dari molekul H₂O yang netral."
+      }
+    ];
+    
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+    
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...config, ...newConfig };
+          updateUI();
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.primary_color || defaultConfig.primary_color,
+              set: (value) => window.elementSdk.setConfig({ primary_color: value })
+            },
+            {
+              get: () => cfg.secondary_color || defaultConfig.secondary_color,
+              set: (value) => window.elementSdk.setConfig({ secondary_color: value })
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => window.elementSdk.setConfig({ text_color: value })
+            },
+            {
+              get: () => cfg.accent_color || defaultConfig.accent_color,
+              set: (value) => window.elementSdk.setConfig({ accent_color: value })
+            },
+            {
+              get: () => cfg.surface_color || defaultConfig.surface_color,
+              set: (value) => window.elementSdk.setConfig({ surface_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['main_title', cfg.main_title || defaultConfig.main_title],
+          ['teacher_name', cfg.teacher_name || defaultConfig.teacher_name]
+        ])
+      });
+    }
+    
+    function updateUI() {
+      document.getElementById('mainTitle').innerHTML = config.main_title || defaultConfig.main_title;
+      document.getElementById('teacherName').textContent = 'Oleh: ' + (config.teacher_name || defaultConfig.teacher_name);
+    }
+    
+    // Slide Navigation
+    function showSlide(n) {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        if (index === n - 1) {
+          slide.classList.add('active');
+        }
+      });
+      
+      currentSlide = n;
+      document.getElementById('slideCounter').textContent = `${n} / ${totalSlides}`;
+      document.getElementById('progress').style.width = `${(n / totalSlides) * 100}%`;
+      
+      // Show/hide teacher notes based on toggle
+      updateNotesVisibility();
+      
+      // Initialize quiz if on quiz slide
+      if (n === 11) {
+        initQuiz();
+      }
+    }
+    
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+    
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+    
+    function toggleTeacherNotes() {
+      showNotes = !showNotes;
+      updateNotesVisibility();
+    }
+    
+    function updateNotesVisibility() {
+      const allNotes = document.querySelectorAll('.teacher-note');
+      allNotes.forEach(note => {
+        if (showNotes) {
+          note.classList.remove('hidden');
+        } else {
+          note.classList.add('hidden');
+        }
+      });
+    }
+    
+    // Ion Animation
+    function showIonAnimation(type) {
+      const visual = document.getElementById('ionVisual');
+      visual.classList.remove('hidden');
+      
+      if (type === 'elektrolit') {
+        visual.innerHTML = `
+          <div class="w-full h-full bg-blue-100 rounded-xl relative overflow-hidden flex items-center justify-center">
+            <div class="absolute w-4 h-4 bg-red-500 rounded-full ion-particle" style="left: 20%; animation-delay: 0s;"><span class="text-white text-xs font-bold flex items-center justify-center h-full">+</span></div>
+            <div class="absolute w-4 h-4 bg-blue-500 rounded-full ion-particle" style="left: 40%; animation-delay: 0.5s;"><span class="text-white text-xs font-bold flex items-center justify-center h-full">-</span></div>
+            <div class="absolute w-4 h-4 bg-red-500 rounded-full ion-particle" style="left: 60%; animation-delay: 1s;"><span class="text-white text-xs font-bold flex items-center justify-center h-full">+</span></div>
+            <div class="absolute w-4 h-4 bg-blue-500 rounded-full ion-particle" style="left: 80%; animation-delay: 1.5s;"><span class="text-white text-xs font-bold flex items-center justify-center h-full">-</span></div>
+            <p class="text-green-700 font-bold z-10 bg-white/80 px-3 py-1 rounded">⚡ Ion bergerak bebas = LISTRIK MENGALIR!</p>
+          </div>
+        `;
+      } else {
+        visual.innerHTML = `
+          <div class="w-full h-full bg-gray-100 rounded-xl relative overflow-hidden flex items-center justify-center">
+            <div class="absolute w-6 h-6 bg-purple-400 rounded-full" style="left: 25%; top: 40%;"><span class="text-white text-xs flex items-center justify-center h-full">○</span></div>
+            <div class="absolute w-6 h-6 bg-purple-400 rounded-full" style="left: 50%; top: 50%;"><span class="text-white text-xs flex items-center justify-center h-full">○</span></div>
+            <div class="absolute w-6 h-6 bg-purple-400 rounded-full" style="left: 70%; top: 35%;"><span class="text-white text-xs flex items-center justify-center h-full">○</span></div>
+            <p class="text-red-700 font-bold z-10 bg-white/80 px-3 py-1 rounded">🚫 Hanya molekul netral = TIDAK ADA ARUS!</p>
+          </div>
+        `;
+      }
+    }
+    
+    // Demo functionality
+    function testSolution(solution) {
+      const bulb = document.getElementById('demoBulb');
+      const liquid = document.getElementById('demoLiquid');
+      const result = document.getElementById('demoResult');
+      const bubbles = document.getElementById('demoBubbles');
+      
+      // Reset
+      bulb.classList.remove('bulb-on');
+      bulb.classList.add('bulb-off');
+      bubbles.innerHTML = '';
+      
+      setTimeout(() => {
+        switch(solution) {
+          case 'nacl':
+            bulb.classList.remove('bulb-off');
+            bulb.classList.add('bulb-on');
+            liquid.style.background = 'rgba(74, 222, 128, 0.5)';
+            result.innerHTML = '<p class="text-green-400 font-bold">💡 TERANG! 🫧 Banyak gelembung!</p><p class="text-sm text-green-300">NaCl = Elektrolit KUAT</p>';
+            createBubbles(bubbles, 8);
+            break;
+          case 'cuka':
+            bulb.classList.remove('bulb-off');
+            bulb.style.filter = 'brightness(0.5)';
+            liquid.style.background = 'rgba(250, 204, 21, 0.5)';
+            result.innerHTML = '<p class="text-yellow-400 font-bold">💡 REDUP... 🫧 Sedikit gelembung</p><p class="text-sm text-yellow-300">CH₃COOH = Elektrolit LEMAH</p>';
+            createBubbles(bubbles, 3);
+            break;
+          case 'gula':
+            liquid.style.background = 'rgba(248, 113, 113, 0.3)';
+            result.innerHTML = '<p class="text-red-400 font-bold">💡 TIDAK MENYALA!</p><p class="text-sm text-red-300">C₁₂H₂₂O₁₁ = NON Elektrolit</p>';
+            break;
+          case 'aquades':
+            liquid.style.background = 'rgba(147, 197, 253, 0.5)';
+            result.innerHTML = '<p class="text-blue-400 font-bold">💡 TIDAK MENYALA!</p><p class="text-sm text-blue-300">H₂O murni = NON Elektrolit</p>';
+            break;
+        }
+      }, 300);
+    }
+    
+    function createBubbles(container, count) {
+      for (let i = 0; i < count; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'absolute w-2 h-2 bg-white/70 rounded-full bubble-animate';
+        bubble.style.left = `${20 + Math.random() * 60}%`;
+        bubble.style.bottom = `${Math.random() * 50}%`;
+        bubble.style.animationDelay = `${Math.random() * 2}s`;
+        container.appendChild(bubble);
+      }
+    }
+    
+    // Quiz functionality
+    function initQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      document.getElementById('quizContainer').classList.remove('hidden');
+      document.getElementById('quizResult').classList.add('hidden');
+      document.getElementById('score').textContent = '0';
+      loadQuestion();
+    }
+    
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      document.getElementById('questionNum').textContent = currentQuestion + 1;
+      document.getElementById('questionText').textContent = q.question;
+      
+      const optionsContainer = document.getElementById('optionsContainer');
+      optionsContainer.innerHTML = '';
+      
+      q.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option w-full bg-white rounded-xl p-4 flex items-center gap-4 border-2 border-gray-200 text-left';
+        btn.innerHTML = `
+          <span class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center font-bold text-gray-600 shrink-0">${String.fromCharCode(65 + index)}</span>
+          <span class="text-gray-700">${option}</span>
+        `;
+        btn.onclick = () => selectAnswer(index);
+        optionsContainer.appendChild(btn);
+      });
+      
+      document.getElementById('feedback').classList.add('hidden');
+      document.getElementById('nextBtn').classList.add('hidden');
+      answered = false;
+    }
+    
+    function selectAnswer(index) {
+      if (answered) return;
+      answered = true;
+      
+      const q = quizData[currentQuestion];
+      const options = document.querySelectorAll('.quiz-option');
+      const feedback = document.getElementById('feedback');
+      const feedbackText = document.getElementById('feedbackText');
+      const feedbackExplanation = document.getElementById('feedbackExplanation');
+      
+      options.forEach((opt, i) => {
+        opt.classList.add('disabled');
+        if (i === q.correct) {
+          opt.classList.add('correct');
+        } else if (i === index && index !== q.correct) {
+          opt.classList.add('incorrect');
+        }
+      });
+      
+      if (index === q.correct) {
+        score++;
+        document.getElementById('score').textContent = score;
+        feedback.className = 'mt-4 rounded-xl p-4 text-center bg-green-100 border-2 border-green-400';
+        feedbackText.className = 'font-semibold text-green-700';
+        feedbackText.textContent = '✅ Benar! Hebat!';
+      } else {
+        feedback.className = 'mt-4 rounded-xl p-4 text-center bg-red-100 border-2 border-red-400';
+        feedbackText.className = 'font-semibold text-red-700';
+        feedbackText.textContent = '❌ Kurang tepat!';
+      }
+      
+      feedbackExplanation.textContent = q.explanation;
+      feedback.classList.remove('hidden');
+      
+      if (currentQuestion < quizData.length - 1) {
+        document.getElementById('nextBtn').textContent = 'Soal Berikutnya →';
+      } else {
+        document.getElementById('nextBtn').textContent = 'Lihat Hasil 🏆';
+      }
+      document.getElementById('nextBtn').classList.remove('hidden');
+    }
+    
+    function nextQuestion() {
+      if (currentQuestion < quizData.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+    
+    function showResult() {
+      document.getElementById('quizContainer').classList.add('hidden');
+      document.getElementById('quizResult').classList.remove('hidden');
+      document.getElementById('finalScore').textContent = `${score}/5`;
+    }
+    
+    function restartQuiz() {
+      initQuiz();
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleTeacherNotes();
+      }
+    });
+    
+    // Initialize
+    updateUI();
+    showSlide(1);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d2f355675ac8bc8',t:'MTc3MTkzODY4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
